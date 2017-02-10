@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">CRUD Firebase</string>
+    <string name="nombres">Nombres</string>
+    <string name="apellidoPaterno">Apellido Paterno</string>
+    <string name="apellidoMaterno">Apellido Materno</string>
+    <string name="telefono">Teléfono</string>
+    <string name="editar">Editar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="email">Email</string>
+    <string name="direccion">Dirección</string>
+    <string name="agregar">Agregar</string>
+
+</resources>
