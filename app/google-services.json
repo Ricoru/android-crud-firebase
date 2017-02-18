@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "536987066898",
+    "firebase_url": "https://demoagenda-1273a.firebaseio.com",
+    "project_id": "demoagenda-1273a",
+    "storage_bucket": "demoagenda-1273a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:536987066898:android:d70209dd589f584e",
+        "android_client_info": {
+          "package_name": "com.gdgtrujillo.crudfirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "536987066898-un8ke1e4l28457nlc9s0rsd0vpnkpehp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBy68wNBxUUYV2msrKorVy1gbNCvDwJyQs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

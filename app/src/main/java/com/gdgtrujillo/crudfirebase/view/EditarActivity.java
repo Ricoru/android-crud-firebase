@@ -10,7 +10,9 @@ import android.widget.Toast;
 
 import com.gdgtrujillo.crudfirebase.R;
 import com.gdgtrujillo.crudfirebase.entidad.Contacto;
-import com.gdgtrujillo.crudfirebase.global.ContactoRepository;
+import com.gdgtrujillo.crudfirebase.global.Constante;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -29,6 +31,9 @@ public class EditarActivity extends AppCompatActivity {
     List<Contacto> listaContactos;
     Contacto contacto;
 
+    FirebaseDatabase mDatabase;
+    DatabaseReference mRefContacto;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,11 +41,21 @@ public class EditarActivity extends AppCompatActivity {
 
         // Obteniendo la posicion del contacto de la listaContactos
         Intent intent = getIntent();
-        position = intent.getIntExtra("EXTRA_POSITION", 0);
+        //position = intent.getIntExtra("EXTRA_POSITION", 0);
 
         // Obteniendo el contacto de la listaContactos
-        listaContactos = ContactoRepository.getInstance().getContactos();
-        contacto = listaContactos.get(position);
+        //listaContactos = ContactoRepository.getInstance().getContactos();
+        //contacto = listaContactos.get(position);
+        if(getIntent().getExtras()!=null){
+            contacto = new Contacto();
+            contacto.key = getIntent().getStringExtra("CONTACTO_KEY");
+            contacto.nombres = getIntent().getStringExtra("CONTACTO_NOMBRE");
+            contacto.apellidoPaterno = getIntent().getStringExtra("CONTACTO_APEPATERNO");
+            contacto.apellidoMaterno = getIntent().getStringExtra("CONTACTO_APEMATERNO");
+            contacto.telefono = getIntent().getStringExtra("CONTACTO_TELEFONO");
+            contacto.email = getIntent().getStringExtra("CONTACTO_EMAIL");
+            contacto.direccion = getIntent().getStringExtra("CONTACTO_DIRECCION");
+        }
 
         // Instancia de views
         txtNombres = (EditText)findViewById(R.id.txtNombres);
@@ -63,6 +78,14 @@ public class EditarActivity extends AppCompatActivity {
         // Asignando eventos a los botones
         btnEditar.setOnClickListener(editarClickListener);
         btnCancelar.setOnClickListener(cancelarClickListener);
+
+        init();
+    }
+
+    private void init(){
+        //crear las instancias de Database de Firebase para poder consumir su servicio.
+        mDatabase = FirebaseDatabase.getInstance();//Instanciamos el servicios
+        mRefContacto = mDatabase.getReference(Constante.contacto);//apuntamos con que nodo vamos a trabajar
     }
 
     private View.OnClickListener editarClickListener = new View.OnClickListener() {
@@ -76,8 +99,8 @@ public class EditarActivity extends AppCompatActivity {
             contacto.setDireccion(txtDireccion.getText().toString());
 
             //listaContactos.set(position, contacto);
+            mRefContacto.child(contacto.key).setValue(contacto);
             Toast.makeText(EditarActivity.this, "Datos editados correctamente!", Toast.LENGTH_SHORT).show();
-
             finish();
         }
     };

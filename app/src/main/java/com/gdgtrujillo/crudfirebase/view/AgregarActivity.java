@@ -9,7 +9,10 @@ import android.widget.Toast;
 
 import com.gdgtrujillo.crudfirebase.R;
 import com.gdgtrujillo.crudfirebase.entidad.Contacto;
+import com.gdgtrujillo.crudfirebase.global.Constante;
 import com.gdgtrujillo.crudfirebase.global.ContactoRepository;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -25,6 +28,9 @@ public class AgregarActivity extends AppCompatActivity {
     Button  btnCancelar;
 
     List<Contacto> listaContactos;
+
+    FirebaseDatabase mDatabase;
+    DatabaseReference mRefContacto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +51,14 @@ public class AgregarActivity extends AppCompatActivity {
 
         btnAgregar.setOnClickListener(agregarClickListener);
         btnCancelar.setOnClickListener(cancelarClickListener);
+
+        init();
+    }
+
+    private void init(){
+        //crear las instancias de Database de Firebase para poder consumir su servicio.
+        mDatabase = FirebaseDatabase.getInstance();//Instanciamos el servicios
+        mRefContacto = mDatabase.getReference(Constante.contacto);//apuntamos con que nodo vamos a trabajar
     }
 
     private Contacto crearContacto(){
@@ -66,11 +80,15 @@ public class AgregarActivity extends AppCompatActivity {
         public void onClick(View v) {
 
             Contacto contacto = crearContacto();
-
-            listaContactos.add(contacto);
+            //Trabajando con listas
+            //listaContactos.add(contacto);
+            //Guardando el registro en Firebase
+            /*aquí estamos accediendo a la referencia, generando un id automatico, y pasandole como objecto.
+            la clase contacto*/
+            mRefContacto.push().setValue(contacto);
             Toast.makeText(AgregarActivity.this, "Usuario agregado correctamente!", Toast.LENGTH_SHORT).show();
-
             finish();
+
         }
     };
 

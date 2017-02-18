@@ -1,16 +1,25 @@
 package com.gdgtrujillo.crudfirebase.entidad;
 
+import com.google.firebase.database.Exclude;
+
 /**
  * Created by brianbritto on 09/02/17.
  */
 
 public class Contacto {
-    private String nombres;
-    private String apellidoPaterno;
-    private String apellidoMaterno;
-    private String telefono;
-    private String email;
-    private String direccion;
+
+    //al agregar la anotación exclude, le estoy diciendo a firebase que los únicos campos que necesito
+    //para enviar y obtener, son los q no están excluidos para este objecto o clase.
+
+    @Exclude
+    public String key;
+
+    public String nombres;
+    public String apellidoPaterno;
+    public String apellidoMaterno;
+    public String telefono;
+    public String email;
+    public String direccion;
 
     public Contacto(){}
 

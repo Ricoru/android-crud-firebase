@@ -10,6 +10,7 @@ import java.util.List;
  */
 
 public class ContactoRepository {
+
     private static ContactoRepository repositorio = new ContactoRepository();
     List<Contacto> contactos = new ArrayList<>();
 
@@ -29,4 +30,5 @@ public class ContactoRepository {
     public List<Contacto> getContactos() {
         return contactos;
     }
+
 }
